@@ -31,7 +31,7 @@
                     <div class="collapse navbar-collapse justify-content-end" id="navegacao">
                         <ul class="navbar-nav navbar-dark">
                             <li>
-                                <a href="cadastro.php" class="nav-link link-secondary text-white">Cadastre-se</a>
+                                <a href="views/cadastro.php" class="nav-link link-secondary text-white">Cadastre-se</a>
                             </li>
                             <li>
                                 <a href="#" class="nav-link link-secondary text-white">Sobre nós</a>
@@ -47,7 +47,7 @@
                 <section class="d-flex justify-content-center">
                     <div class="p-5 bg-dark form-container">
                         <h3 class="text-white mb-4">Registre-se</h3>
-                        <form action="validar_login.php" method="post">
+                        <form action="model/validar_login.php" method="post">
                             <div class="form-floating my-1">
                                 <input name="email" type="email" class="form-control" id="email_input" placeholder="seu-email@gmail.com">
                                 <label for="email_input">E-mail</label>

@@ -1,14 +1,14 @@
-<?php require "validar_acessos.php"; ?>
+<?php require "../model/validar_acessos.php"; ?>
 
 <!doctype html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="style.css">
+    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../style.css">
     <title>Pizzaria do Cuca - Consultar Pedidos</title>
-    <link rel="icon" href="imagens/fatia.png">
+    <link rel="icon" href="../imagens/fatia.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <style>
@@ -31,7 +31,7 @@
                 <div class="d-flex align-items-center">
                     <!-- Logo -->
                     <a href="#">
-                        <img src="imagens/fatia.png" id="logo" class="navbar-brand" alt="logo pizza">
+                        <img src="../imagens/fatia.png" id="logo" class="navbar-brand" alt="logo pizza">
                     </a>
                     <h3 class="text-white">Consulta de Pedidos</h3>
                 </div>
@@ -54,7 +54,7 @@
                             <a href="perfil.php" class="nav-link link-secondary text-white">Perfil</a>
                         </li>
                         <li>
-                            <a href="logoff.php" class="nav-link link-secondary text-white">Sair</a>
+                            <a href="../model/logoff.php" class="nav-link link-secondary text-white">Sair</a>
                         </li>
                     </ul>
                 </div>
