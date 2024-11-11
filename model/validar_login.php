@@ -54,7 +54,7 @@
                 exit();
             }
             else{
-                header('Location: index.php?login=erro');
+                header('Location: ../index.php?login=erro');
                 $_SESSION['autenticado'] = 'NAO';
                 exit();
             }

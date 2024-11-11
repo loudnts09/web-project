@@ -41,7 +41,7 @@
         <section class="d-flex justify-content-center">
           <div class="p-5 bg-dark text-white rounded">
             <h3 class="mb-4">Cadastro de Novo Usuário</h3>
-            <form action="../model/cadastrar_usuario.php" method="POST" enctype="multipart/form-data">
+            <form action="../controller/cadastrar_usuario.php" method="POST" enctype="multipart/form-data">
               <!-- Foto do Usuário -->
               <div class="form-group mb-3">
                 <label for="foto" class="form-label">Foto</label>

@@ -1,4 +1,4 @@
-<?php require_once "../model/validar_acessos.php"; ?>
+<?php require "../controller/validar_acessos.php"; ?>
 
 <!doctype html>
 <html lang="pt-br">
@@ -31,7 +31,7 @@
               <li><a href="home.php" class="nav-link link-secondary text-white">Home</a></li>
               <li><a href="#" class="nav-link link-secondary text-white">Sobre nós</a></li>
               <li><a href="perfil.php" class="nav-link link-secondary text-white">Perfil</a></li>
-              <li><a href="../model/logoff.php" class="nav-link link-secondary text-white">Sair</a></li>
+              <li><a href="../controller/logoff.php" class="nav-link link-secondary text-white">Sair</a></li>
             </ul>
           </div>
         </div>

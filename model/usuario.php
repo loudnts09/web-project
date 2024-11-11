@@ -1,18 +1,84 @@
 <?php
 
-require "upload.php";
-
     class Usuario{
         private $conn;
+        private $id;
+        private $nome;
+        private $numero;
+        private $email;
+        private $foto;
+        private $tipo_perfil;
+        private $senha;
+
         private $tabela = 'pessoas';
 
         public function __construct($db){
             $this->conn = $db;
         }
 
-        public function criarUsuario($foto, $nome, $numero, $email, $senha, $tipo_perfil) {
-            $caminho_da_foto = upload();
+        public function fromPOST($data){
+            $this->id = $data['id'];
+            $this->nome = $data['nome'];
+            $this->numero = $data['numero'];
+            $this->email = $data['email'];
+            $this->foto = $data['foto'];
+            $this->tipo_perfil = $data['perfil'];
+            $this->senha = $data['senha'];
 
+            if(empty($this->numero)){
+                $this->numero = null;
+            }
+
+            if(empty($this->foto)){
+                $this->foto = null;
+            }
+
+        }
+
+        public function criarString(){
+            $sql = "INSERT INTO ". $this->tabela . " (foto, nome, numero, email, senha, tipo_perfil) VALUES (:foto, :nome, :numero, :email, :senha, :tipo_perfil)";
+            return $sql;
+        }
+
+        public function lerString(){
+            $sql = "SELECT * FROM " . $this->tabela;
+            return $sql;
+        }
+
+        public function atualizarString(){
+            $sql = "UPDATE " . $this->tabela . " SET foto = :foto, nome = :nome, numero = :numero, email = :email, senha = :senha, tipo_perfil = :tipo_perfil";
+            return $sql;
+        }
+
+        public function deletarString(){
+            $sql =  "DELETE FROM " . $this->tabela;
+            return $sql;
+        }
+
+        public function preencherQuery($stmt){
+            
+            if(isset($stmt["id"]) && $stmt["email"]){
+                return $stmt["id"];
+            }
+            else if(isset($stmt["id"])){
+                $stmt->bindParam("id", $stmt["id"]);
+            }
+            $stmt->bindParam(":nome", $this->nome);
+            $stmt->bindParam(":numero", $this->numero);
+            $stmt->bindParam(":email", $this->email);
+            $stmt->bindParam(":tipo_perfil", $this->tipo_perfil);
+            $stmt->bindParam(":senha", $this->senha);
+            $stmt->bindParam(":foto", $this->foto);
+            
+            return $stmt;
+        }
+
+//-------------------------------------------------------------------------------------------------------
+
+        public function criarUsuario($foto, $nome, $numero, $email, $senha, $tipo_perfil) {
+            $arquivo = new Arquivo;
+            $caminho_da_foto = $arquivo->upload();
+            
             if($caminho_da_foto === false){
                 $caminho_da_foto = null;
             }
@@ -47,27 +113,21 @@ require "upload.php";
         }
 
         public function atualizarUsuario($id, $foto, $nome, $numero, $email, $senha, $tipo_perfil) {
-            $diretorio = "../uploads/";
-            $caminho_foto = null;
-    
-            if (!empty($foto['name'])) {
-                $caminho_foto = $diretorio . uniqid() . "_" . basename($foto['name']);
-                if (!move_uploaded_file($foto['tmp_name'], $caminho_foto)) {
-                    echo "Erro ao fazer upload da foto!";
-                    return false;
-                }
+            $arquivo = new Arquivo;
+            $caminho_da_foto = $arquivo->upload();;
+
+            if ($caminho_da_foto === false) {
+                $foto = null;
             }
     
-            $query = "UPDATE " . $this->tabela . " SET nome = :nome, numero = :numero, email = :email, senha = :senha, tipo_perfil = :tipo_perfil";
+            $query = "UPDATE " . $this->tabela . " SET foto = :foto, nome = :nome, numero = :numero, email = :email, senha = :senha, tipo_perfil = :tipo_perfil";
     
-            if ($caminho_foto) {
-                $query .= ", foto = :foto";
-            }
             
             $query .= " WHERE id = :id";
             $atualizarUsuarioStmt = $this->conn->prepare($query);
     
             $atualizarUsuarioStmt->bindParam(':id', $id);
+            $atualizarUsuarioStmt->bindParam(':foto', $foto);
             $atualizarUsuarioStmt->bindParam(':nome', $nome);
     
             $numero = empty($numero) ? null : $numero;
@@ -77,8 +137,8 @@ require "upload.php";
             $atualizarUsuarioStmt->bindParam(':senha', $senha);
             $atualizarUsuarioStmt->bindParam(':tipo_perfil', $tipo_perfil);
     
-            if ($caminho_foto) {
-                $atualizarUsuarioStmt->bindParam(':foto', $caminho_foto);
+            if ($caminho_da_foto) {
+                $atualizarUsuarioStmt->bindParam(':foto', $caminho_da_foto);
             }
     
             if ($atualizarUsuarioStmt->execute()) {
