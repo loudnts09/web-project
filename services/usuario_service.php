@@ -13,26 +13,26 @@ class UsuarioService{
         $this->db = $database->conectar();
     }
 
-    public function cadastrar($data){
+    public function cadastrar($data, $id){
 
         $arquivo = new Arquivo;
         $caminho_da_foto = $arquivo->upload();
-            
+        
         if($caminho_da_foto === false){
             $caminho_da_foto = null;
         }
-
+        
         $data["foto"] = $caminho_da_foto;
 
         $usuario = new Usuario($this->db);
         
-        $usuario->fromPOST($data);
+        $usuario->fromPOST($data, $id);
         
         $sql = $usuario->criarString();
 
         $inserirUsuarioStmt = $this->db->prepare($sql);
 
-        $inserirUsuarioStmt = $usuario->preencherQuery($inserirUsuarioStmt);
+        $inserirUsuarioStmt = $usuario->preencherQuery($inserirUsuarioStmt, null);
 
 
         if ($inserirUsuarioStmt->execute()) {
@@ -45,16 +45,16 @@ class UsuarioService{
 
     }
 
-    public function atualizar($data){
+    public function atualizar($data, $id){
         $usuario = new Usuario($this->db);
 
-        $usuario->fromPOST($data);
+        $usuario->fromPOST($data, $id);
 
         $sql = $usuario->atualizarString();
 
         $atualizarUsuarioStmt = $this->db->prepare($sql);
 
-        $atualizarUsuarioStmt = $usuario->preencherQuery($atualizarUsuarioStmt);
+        $atualizarUsuarioStmt = $usuario->preencherQuery($atualizarUsuarioStmt, 'atualizar');
 
         if ($atualizarUsuarioStmt->execute()) {
             echo "Usuário criado com sucesso!";
@@ -66,22 +66,52 @@ class UsuarioService{
         
     }
 
-    public function deletar($data){
+    public function deletar($data, $id){
         $usuario = new Usuario($this->db);
+
+        $usuario->fromPOST($data, $id);
 
         $sql = $usuario->deletarString();
 
         $deletarUsuarioStmt = $this->db->prepare($sql);
 
-        $ideletarirUsuarioStmt = $usuario->preencherQuery($deletarUsuarioStmt);
+        $deletarUsuarioStmt = $usuario->preencherQuery($deletarUsuarioStmt, 'deletar');
 
         if ($deletarUsuarioStmt->execute()) {
-            echo "Usuário deletado com sucesso!";
-            return true;
+            header('Location: ../index.php?usuario=deletado');
+            exit();
         } else {
-            echo "Falha ao criar usuário!";
+            header('Location: ../views/perfil.php?usuario=presente');
             return false;
         }
+    }
+
+    public function ler($data, $id){
+
+        $usuario = new Usuario($this->db);
+
+        $usuario->fromPOST($data, $id);
+
+
+        $sql = $usuario->lerString();
+
+        $lerUsuarioStmt = $this->db->prepare($sql);
+
+        $lerUsuarioStmt = $usuario->preencherQuery($lerUsuarioStmt, 'ler');
+
+        if ($lerUsuarioStmt->execute()) {
+            $dadosUsuario = $lerUsuarioStmt->fetch(PDO::FETCH_ASSOC);
+            if($dadosUsuario){
+                $_SESSION['dados'] = $dadosUsuario;
+                return true;
+            }
+            else{
+                return false;
+            }
+        } else {
+            return false;
+        }
+
     }
 
 

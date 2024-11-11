@@ -6,16 +6,16 @@ session_start();
 
 $usuarioService = new UsuarioService();
 
-$validar = $usuarioService->atualizar($_POST);
+$validar = $usuarioService->atualizar($_POST, $_SESSION["id"]);
 
 if($validar){
-    $_SESSION['cadastrado'] = 'SIM';
-    header("Location: ../views/cadastro.php?cadastro=feito"); 
+    $_SESSION['atualizado'] = 'SIM';
+    header("Location: ler_usuario.php?cadastro=atualizado"); 
     exit;
 }
 else{
     $_SESSION['cadastrado'] = 'NAO';
-    header("Location: ../views/cadastro.php?cadastro=erro"); 
+    header("Location: ../views/ler_usuario.php?cadastro=naoatualizado"); 
     exit;
 }
 

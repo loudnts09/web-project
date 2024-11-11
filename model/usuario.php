@@ -10,20 +10,22 @@
         private $tipo_perfil;
         private $senha;
 
-        private $tabela = 'pessoas';
+        //private $tabela = 'pessoas';
 
         public function __construct($db){
             $this->conn = $db;
         }
 
-        public function fromPOST($data){
-            $this->id = $data['id'];
-            $this->nome = $data['nome'];
-            $this->numero = $data['numero'];
-            $this->email = $data['email'];
-            $this->foto = $data['foto'];
-            $this->tipo_perfil = $data['perfil'];
-            $this->senha = $data['senha'];
+        public function fromPOST($data, $id){
+            if($id != null){
+                $this->id = $id;
+            }
+            $this->nome = $data['nome'] ?? null;
+            $this->numero = $data['numero'] ?? null;
+            $this->email = $data['email'] ?? null;
+            $this->foto = $data['foto'] ?? null;
+            $this->tipo_perfil = $data['perfil'] ?? null;
+            $this->senha = $data['senha'] ?? null;
 
             if(empty($this->numero)){
                 $this->numero = null;
@@ -36,33 +38,36 @@
         }
 
         public function criarString(){
-            $sql = "INSERT INTO ". $this->tabela . " (foto, nome, numero, email, senha, tipo_perfil) VALUES (:foto, :nome, :numero, :email, :senha, :tipo_perfil)";
+            $sql = "INSERT INTO pessoas (foto, nome, numero, email, senha, tipo_perfil) VALUES (:foto, :nome, :numero, :email, :senha, :tipo_perfil)";
             return $sql;
         }
 
         public function lerString(){
-            $sql = "SELECT * FROM " . $this->tabela;
+            $sql = "SELECT * FROM pessoas WHERE id = :id";
             return $sql;
         }
 
         public function atualizarString(){
-            $sql = "UPDATE " . $this->tabela . " SET foto = :foto, nome = :nome, numero = :numero, email = :email, senha = :senha, tipo_perfil = :tipo_perfil";
+            $sql = "UPDATE pessoas SET foto = :foto, nome = :nome, numero = :numero, email = :email, senha = :senha, tipo_perfil = :tipo_perfil WHERE id = :id";
             return $sql;
         }
 
         public function deletarString(){
-            $sql =  "DELETE FROM " . $this->tabela;
+            $sql =  "DELETE FROM pessoas WHERE id = :id";
             return $sql;
         }
 
-        public function preencherQuery($stmt){
+        public function preencherQuery($stmt, $operacao){
             
-            if(isset($stmt["id"]) && $stmt["email"]){
-                return $stmt["id"];
+            if($operacao === 'ler' || $operacao === 'deletar'){
+                $stmt->bindParam(":id", $this->id);
+                return $stmt;
             }
-            else if(isset($stmt["id"])){
-                $stmt->bindParam("id", $stmt["id"]);
+
+            if($operacao === 'atualizar'){
+                $stmt->bindParam(":id", $this->id);
             }
+
             $stmt->bindParam(":nome", $this->nome);
             $stmt->bindParam(":numero", $this->numero);
             $stmt->bindParam(":email", $this->email);
@@ -75,7 +80,7 @@
 
 //-------------------------------------------------------------------------------------------------------
 
-        public function criarUsuario($foto, $nome, $numero, $email, $senha, $tipo_perfil) {
+        /*public function criarUsuario($foto, $nome, $numero, $email, $senha, $tipo_perfil) {
             $arquivo = new Arquivo;
             $caminho_da_foto = $arquivo->upload();
             
@@ -186,8 +191,8 @@
                 echo 'Falha ao deletar usuário.';
                 return false;
             }
-        }
-    }
+        }*/
+}
 
 
 ?>

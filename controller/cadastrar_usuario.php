@@ -6,7 +6,7 @@
 
     $usuarioService = new UsuarioService();
 
-    $validar = $usuarioService->cadastrar($_POST);
+    $validar = $usuarioService->cadastrar($_POST, null);
 
     if($validar){
         $_SESSION['cadastrado'] = 'SIM';

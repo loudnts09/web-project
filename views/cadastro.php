@@ -75,9 +75,9 @@
               <!-- Tipo de Perfil -->
               <div class="form-group mb-3">
                 <label for="perfil" class="form-label">Tipo de Perfil</label>
-                <select name="perfil" class="form-control" id="perfil" required>
-                  <option value="usuario">Usuário</option>
-                  <option value="administrador">Administrador</option>
+                  <select name="perfil" class="form-control" id="perfil" required>
+                    <option value="usuario">Usuário</option>
+                    <option value="administrador">Administrador</option>
                 </select>
               </div>
               <?php if (isset($_GET["cadastro"]) && $_GET["cadastro"] == "feito"){ ?>

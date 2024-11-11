@@ -6,16 +6,16 @@
 
     $usuarioService = new UsuarioService();
 
-    $validar = $usuarioService->deletar($_POST['id']);data: 
+    $validar = $usuarioService->deletar(null, $_SESSION['id']);data: 
 
     if($validar){
-        $_SESSION['cadastrado'] = 'SIM';
-        header("Location: ../views/cadastro.php?cadastro=feito"); 
+        $_SESSION['cadastrado'] = 'NAO';
+        header("Location: ../index?cadastro=ausente"); 
         exit;
     }
     else{
-        $_SESSION['cadastrado'] = 'NAO';
-        header("Location: ../views/cadastro.php?cadastro=erro"); 
+        $_SESSION['cadastrado'] = 'SIM';
+        header("Location: ../views/cadastro.php?cadastro=presente"); 
         exit;
     }
 

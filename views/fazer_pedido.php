@@ -30,7 +30,7 @@
             <ul class="navbar-nav navbar-dark">
               <li><a href="home.php" class="nav-link link-secondary text-white">Home</a></li>
               <li><a href="#" class="nav-link link-secondary text-white">Sobre nós</a></li>
-              <li><a href="perfil.php" class="nav-link link-secondary text-white">Perfil</a></li>
+              <li><a href="../controller/ler_usuario.php" class="nav-link link-secondary text-white">Perfil</a></li>
               <li><a href="../controller/logoff.php" class="nav-link link-secondary text-white">Sair</a></li>
             </ul>
           </div>
@@ -44,10 +44,10 @@
         <section class="d-flex justify-content-center">
           <div class="p-4 bg-dark form-container">
             <h3 class="text-white mb-4">Faça seu Pedido</h3>
-            <form method="post" action="registrar_pedido.php">
+            <form method="post" action="../controller/realizar_pedido.php">
               <div class="form-floating my-1">
-                <input name="nome_pizza" type="text" class="form-control" id="nome_pizza" placeholder="Digite o nome da pizza">
-                <label for="nome_pizza">Nome da Pizza</label>
+                <input name="nome_da_pizza" type="text" class="form-control" id="nome_da_pizza" placeholder="Digite o nome da pizza">
+                <label for="nome_da_pizza">Nome da Pizza</label>
               </div>
               <div class="form-floating my-1">
                 <select name="tamanho" class="form-select" id="tamanho">

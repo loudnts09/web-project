@@ -51,7 +51,7 @@
                             <a href="#" class="nav-link link-secondary text-white">Sobre nós</a>
                         </li>
                         <li>
-                            <a href="perfil.php" class="nav-link link-secondary text-white">Perfil</a>
+                            <a href="../controller/ler_usuario.php" class="nav-link link-secondary text-white">Perfil</a>
                         </li>
                         <li>
                             <a href="../controller/logoff.php" class="nav-link link-secondary text-white">Sair</a>

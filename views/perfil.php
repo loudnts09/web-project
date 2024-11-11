@@ -1,3 +1,18 @@
+<?php 
+
+session_start();
+
+if (isset($_SESSION['dados'])) {
+  $nome = $_SESSION['dados']['nome'];
+  $numero = $_SESSION['dados']['numero'];
+  $email = $_SESSION['dados']['email'];
+  $senha = $_SESSION['dados']['senha'];
+  $tipo_perfil = $_SESSION['dados']['tipo_perfil'];
+  $foto = $_SESSION['dados']['foto'];
+}
+
+?>
+
 <!doctype html>
 <html lang="pt-br">
   <head>
@@ -47,50 +62,57 @@
             <h3 class="mb-4 text-center">Perfil do Usuario</h3>
             <form action="../controller/atualizar_usuario.php" method="POST" enctype="multipart/form-data">
               <!-- Foto do Usuário -->
-              <div class="text-center mb-3">
-                <img src="#" alt="Foto do usuário" class="rounded-circle mb-3" width="120" height="120"><br>
-                <input type="file" name="foto" class="form-control-file mt-2">
+              <div class="form-goup mb-3">
+                <img src="<?php echo $foto; ?>" alt="Foto do usuário" class="rounded-circle mb-3" width="120" height="120"><br>
+                <label for="foto" class="form-label">Foto</label>
+                <input type="file" name="foto" class="form-control" id="foto" accept="image/*">
               </div>
 
               <!-- Nome do Usuário -->
               <div class="form-group mb-3">
               <label for="nome" class="form-label">Nome</label>
-              <input type="text" id="nome" name="nome" class="form-control" placeholder="Seu nome">
+              <input type="text" id="nome" name="nome" class="form-control" placeholder="Seu nome" value="<?php echo $nome; ?>" required>
               </div>
 
               <!-- Número de Contato -->
               <div class="form-group mb-3">
               <label for="numero" class="form-label">Número de Telefone</label>
-              <input type="tel" id="numero" name="numero" class="form-control" placeholder="(XX) XXXXX-XXXX">
+              <input type="tel" id="numero" name="numero" class="form-control" placeholder="(XX) XXXXX-XXXX" value="<?php echo $numero; ?>">
               </div>
 
               <!-- Email -->
               <div class="form-group mb-3">
               <label for="email" class="form-label">E-mail</label>
-              <input type="email" id="email" name="email" class="form-control" placeholder="seu-email@exemplo.com">
+              <input type="email" id="email" name="email" class="form-control" placeholder="seu-email@exemplo.com" value="<?php echo $email; ?>" required>
               </div>
 
               <!-- Senha -->
               <div class="form-group mb-3">
               <label for="senha" class="form-label">Senha</label>
-              <input type="password" id="senha" name="senha" class="form-control" placeholder="Sua senha">
+              <input type="password" id="senha" name="senha" class="form-control" placeholder="Sua senha" value="<?php echo $senha; ?>" required>
               </div>
 
               <!-- Tipo de Perfil -->
               <div class="form-group mb-3">
-              <label for="tipo_perfil" class="form-label">Tipo de Perfil</label>
-                            <select id="tipo_perfil" name="tipo_perfil" class="form-control">
-                                <option value="usuario">Usuário</option>
-                                <option value="administrador">Administrador</option>
+                <label for="perfil" class="form-label">Tipo de Perfil</label>
+                  <select id="perfil" name="perfil" class="form-control" required>
+                    <option value="usuario" <?php echo ($tipo_perfil == 'usuario') ? 'selected' : ''; ?>>Usuário</option>
+                    <option value="administrador" <?php echo ($tipo_perfil == 'administrador') ? 'selected' : ''; ?>>Administrador</option>
                 </select>
               </div>
-              <?php if (isset($_GET["cadastro"]) && $_GET["cadastro"] == "feito"){ ?>
-                  <div class="alert alert-success mt-4" role="alert">
-                      Cadastro realizado com sucesso!
-                  </div>
-              <?php } else if(isset($_GET["cadastro"]) &&$_GET["cadastro"] == "erro"){ ?>
+              <?php if (isset($_GET["cadastro"]) && $_GET["cadastro"] == "presente"){ ?>
                   <div class="alert alert-danger mt-4" role="alert">
-                      Falha ao realizar cadastro.
+                      Erro ao excluir usuário.
+                  </div>
+              <?php }?>
+              <?php if (isset($_GET["cadastro"]) && $_GET["cadastro"] == "atualizado"){ ?>
+                  <div class="alert alert-sucess mt-4" role="alert">
+                      Usuario atualizado com sucesso!
+                  </div>
+              <?php }?>
+              <?php if (isset($_GET["cadastro"]) && $_GET["cadastro"] == "naoatualizado"){ ?>
+                  <div class="alert alert-warning mt-4" role="alert">
+                      Falha ao atualizar cadastro.
                   </div>
               <?php }?>
 

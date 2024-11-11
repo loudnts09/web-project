@@ -64,6 +64,14 @@
                                     </div>
 
                             <?php } ?>
+                            <?php
+                                if (isset($_GET["usuario"]) && $_GET["usuario"] == "deletado") { ?>
+                                
+                                    <div class="text-danger">
+                                    Usuário excluído com sucesso!
+                                    </div>
+
+                            <?php } ?>
                             <div class="form-check text-start my-2">
                                 <input type="checkbox" class="form-check-input" id="check">
                                 <label class="form-check-label text-white" for="check">Lembrar-me</label>
