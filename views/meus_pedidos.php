@@ -1,4 +1,10 @@
-<?php require "../controller/validar_acessos.php"; ?>
+<?php 
+
+    require "../controller/validar_acessos.php"; 
+
+    session_start();
+
+?>
 
 <!doctype html>
 <html lang="pt-br">
@@ -71,33 +77,27 @@
                         <div class="card-header">
                             Pedidos Realizados
                         </div>
-
-                        <div class="card-body">
+                        <div class="card-body m-3 " style="max-height: 400px; overflow-y: auto;">
                             <!-- Exemplo de pedido -->
-                            <div class="card mb-3 bg-light text-dark">
-                                <div class="card-body">
-                                    <h5 class="card-title">Pedido #1234</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">Margarita - Tamanho Grande</h6>
-                                    <p class="card-text">Endereço de entrega: Rua dos Exemplos, 123</p>
-                                    <p class="card-text">Status: <span class="text-success">Em preparo</span></p>
+                                                    
+                            
+                                <div class="card mb-3 bg-light text-dark">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?php echo '#' . $_SESSION['dadosPedidos']['id'] ?></h5>
+                                        <h6 class="card-subtitle mb-2 text-muted"><?php echo $_SESSION['dadosPedidos']['nome_da_pizza'] . " - " . $_SESSION['dadosPedidos']['tamanho'] ?></h6>
+                                        <p class="card-text"><?php echo $_SESSION['dadosPedidos']['ingredientes'] ?></p>
+                                        <p class="card-text">Status: <span class="text-success">Em preparo</span></p>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <!-- Outro pedido -->
-                            <div class="card mb-3 bg-light text-dark">
-                                <div class="card-body">
-                                    <h5 class="card-title">Pedido #5678</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">Pepperoni - Tamanho Médio</h6>
-                                    <p class="card-text">Endereço de entrega: Rua das Pizzas, 456</p>
-                                    <p class="card-text">Status: <span class="text-danger">Entregue</span></p>
-                                </div>
-                            </div>
+                            
 
-                            <!-- Botão voltar -->
-                            <div class="row mt-5">
-                                <div class="col-12">
-                                    <a href="home.php" class="btn btn-lg btn-warning btn-voltar">Voltar</a>
-                                </div>
+                        </div>
+
+                        <!-- Botão voltar -->
+                        <div class="row m-3 mt-4 mb-3">
+                            <div class="col-12">
+                                <a href="home.php" class="btn btn-lg btn-warning btn-voltar">Voltar</a>
                             </div>
                         </div>
                     </div>

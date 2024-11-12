@@ -39,14 +39,14 @@
     </header>
 
     <!-- Formulário de Pedido -->
-    <main class="d-flex justify-content-center align-items-center vh-100">
+    <main class="d-flex justify-content-center align-items-center">
       <article class="container">
         <section class="d-flex justify-content-center">
           <div class="p-4 bg-dark form-container">
             <h3 class="text-white mb-4">Faça seu Pedido</h3>
             <form method="post" action="../controller/realizar_pedido.php">
               <div class="form-floating my-1">
-                <input name="nome_da_pizza" type="text" class="form-control" id="nome_da_pizza" placeholder="Digite o nome da pizza">
+                <input name="nome_da_pizza" type="text" class="form-control" id="nome_da_pizza" placeholder="Digite o nome da pizza" required>
                 <label for="nome_da_pizza">Nome da Pizza</label>
               </div>
               <div class="form-floating my-1">
@@ -59,10 +59,18 @@
                 <label for="tamanho">Tamanho</label>
               </div>
               <div class="form-floating my-1">
-                <textarea name="ingredientes" class="form-control" id="ingredientes" placeholder="Ingredientes adicionais" style="height: 100px;"></textarea>
+                <textarea name="ingredientes" class="form-control" id="ingredientes" placeholder="Ingredientes adicionais" style="height: 100px;" required></textarea>
                 <label for="ingredientes">Ingredientes Adicionais</label>
               </div>
-              <div class="row mt-4">
+              <?php
+                                if (isset($_GET["pedido"]) && $_GET["pedido"] == "realizado") { ?>
+                                
+                                    <div class="text-success m-1">
+                                    Pedido realizado com sucesso!
+                                    </div>
+
+                            <?php } ?>
+              <div class="row mt-3">
                 <div class="col-6">
                   <a class="btn btn-warning w-100 py-2" href="home.php">Voltar</a>
                 </div>

@@ -67,7 +67,7 @@
                             <?php
                                 if (isset($_GET["usuario"]) && $_GET["usuario"] == "deletado") { ?>
                                 
-                                    <div class="text-danger">
+                                    <div class="text-success">
                                     Usuário excluído com sucesso!
                                     </div>
 

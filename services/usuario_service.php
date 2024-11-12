@@ -108,11 +108,9 @@ class UsuarioService{
             else{
                 return false;
             }
-        } else {
+        }
+        else {
             return false;
         }
-
     }
-
-
 }

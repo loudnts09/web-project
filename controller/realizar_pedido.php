@@ -4,16 +4,9 @@
 
     session_start();
 
-    $pedidoService = new Pedidos_service();
+    $pedidoService = new PedidosService();
 
-    if($_SESSION["tipo_perfil"] == 'administrador'){
-        $perfil_id = 2;
-    }
-    else{
-        $perfil_id = 1;
-    }
-
-    $validar = $pedidoService -> fazerPedidos($_POST, $_SESSION['id'], $perfil_id);
+    $validar = $pedidoService -> fazerPedidos($_POST, $_SESSION['id'], $_SESSION['dados']['tipo_perfil']);
 
     if($validar){
         $_SESSION['pedido'] = 'feito';

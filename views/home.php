@@ -47,7 +47,7 @@
                 <a href="fazer_pedido.php" class="btn btn-primary w-100">Fazer pedido</a>
               </div>
               <div class="col-md-6">
-                <a href="meus_pedidos.php" class="btn btn-warning w-100">Meus Pedidos</a>
+                <a href="../controller/ler_pedidos.php" class="btn btn-warning w-100">Meus Pedidos</a>
               </div>
             </div>
           </div>

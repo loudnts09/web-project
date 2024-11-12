@@ -96,8 +96,8 @@ if (isset($_SESSION['dados'])) {
               <div class="form-group mb-3">
                 <label for="perfil" class="form-label">Tipo de Perfil</label>
                   <select id="perfil" name="perfil" class="form-control" required>
-                    <option value="usuario" <?php echo ($tipo_perfil == 'usuario') ? 'selected' : ''; ?>>Usuário</option>
-                    <option value="administrador" <?php echo ($tipo_perfil == 'administrador') ? 'selected' : ''; ?>>Administrador</option>
+                    <option value="usuario" <?php echo ($tipo_perfil == 1) ? 'selected' : ''; ?>>Usuário</option>
+                    <option value="administrador" <?php echo ($tipo_perfil == 2) ? 'selected' : ''; ?>>Administrador</option>
                 </select>
               </div>
               <?php if (isset($_GET["cadastro"]) && $_GET["cadastro"] == "presente"){ ?>
