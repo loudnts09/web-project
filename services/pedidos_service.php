@@ -47,7 +47,7 @@ class PedidosService{
         $lerPedidoStmt = $pedido->preencherQuery($lerPedidoStmt, 'ler', $perfil_id);
 
         if($lerPedidoStmt->execute()){
-            $dadosPedidos = $lerPedidoStmt ->fetch(PDO::FETCH_ASSOC);
+            $dadosPedidos = $lerPedidoStmt ->fetchAll(PDO::FETCH_ASSOC);
             if($dadosPedidos){
                 $_SESSION['dadosPedidos'] = $dadosPedidos;
                 return true; 

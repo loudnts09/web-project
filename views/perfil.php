@@ -106,8 +106,8 @@ if (isset($_SESSION['dados'])) {
                   </div>
               <?php }?>
               <?php if (isset($_GET["cadastro"]) && $_GET["cadastro"] == "atualizado"){ ?>
-                  <div class="alert alert-sucess mt-4" role="alert">
-                      Usuario atualizado com sucesso!
+                  <div class="text-success m-1">
+                    Perfil atualizado com sucesso!
                   </div>
               <?php }?>
               <?php if (isset($_GET["cadastro"]) && $_GET["cadastro"] == "naoatualizado"){ ?>

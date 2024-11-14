@@ -1,9 +1,12 @@
 <?php 
-
+    ob_start();
     require "../controller/validar_acessos.php"; 
 
     session_start();
 
+    $dadosPedidos = $_SESSION['dadosPedidos'];
+    
+    ob_end_clean()
 ?>
 
 <!doctype html>
@@ -57,7 +60,7 @@
                             <a href="#" class="nav-link link-secondary text-white">Sobre nós</a>
                         </li>
                         <li>
-                            <a href="../controller/ler_usuario.php" class="nav-link link-secondary text-white">Perfil</a>
+                            <a href="../views/perfil.php" class="nav-link link-secondary text-white">Perfil</a>
                         </li>
                         <li>
                             <a href="../controller/logoff.php" class="nav-link link-secondary text-white">Sair</a>
@@ -74,24 +77,31 @@
             <div class="row">
                 <div class="card-consultar-pedido">
                     <div class="card bg-dark text-white">
-                        <div class="card-header">
-                            Pedidos Realizados
+                        <div class="card-header m-3">
+                            <h4>Pedidos Realizados</h4>
                         </div>
                         <div class="card-body m-3 " style="max-height: 400px; overflow-y: auto;">
                             <!-- Exemplo de pedido -->
                                                     
                             
                                 <div class="card mb-3 bg-light text-dark">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?php echo '#' . $_SESSION['dadosPedidos']['id'] ?></h5>
-                                        <h6 class="card-subtitle mb-2 text-muted"><?php echo $_SESSION['dadosPedidos']['nome_da_pizza'] . " - " . $_SESSION['dadosPedidos']['tamanho'] ?></h6>
-                                        <p class="card-text"><?php echo $_SESSION['dadosPedidos']['ingredientes'] ?></p>
-                                        <p class="card-text">Status: <span class="text-success">Em preparo</span></p>
-                                    </div>
+                                    <?php if(!isset($dadosPedidos)){ ?>
+                                        
+                                        <h3 class="text-center">NAO HÁ PEDIDOS</h3>
+                                    <?php }
+                                    else{
+                                        for($i = 0; $i < count($dadosPedidos); $i++){
+                                                for($j = 0; $j < 1; $j++ ){ ?>
+                                                    <div class="card-body mb-3">
+                                                        <h5 class="card-title"><?php echo '#' . $dadosPedidos[$i]['id'] ?></h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted"><?php echo $dadosPedidos[$i]['nome_da_pizza'] . " - " . $dadosPedidos[$i]['tamanho'] ?></h6>
+                                                        <p class="card-text"><?php echo $dadosPedidos[$i]['ingredientes'] ?></p>
+                                                        <p class="card-text">Status: <span class="text-success">Em preparo</span></p>
+                                                    </div>
+                                                <?php }
+                                        }
+                                    } ?>
                                 </div>
-
-                            
-
                         </div>
 
                         <!-- Botão voltar -->

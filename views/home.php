@@ -1,4 +1,8 @@
-<?php require "../controller/validar_acessos.php"; ?>
+<?php 
+require "../controller/validar_acessos.php"; 
+include "../controller/ler_usuario.php";
+
+?>
 
 <!doctype html>
 <html lang="pt-br">
@@ -28,7 +32,7 @@
           <div class="collapse navbar-collapse justify-content-end" id="navegacao">
             <ul class="navbar-nav">
               <li><a href="#" class="nav-link link-secondary text-white">Sobre nós</a></li>
-              <li><a href="../controller/ler_usuario.php" class="nav-link link-secondary text-white">Perfil</a></li>
+              <li><a href="../views/perfil.php" class="nav-link link-secondary text-white">Perfil</a></li>
               <li><a href="../controller/logoff.php" class="nav-link link-secondary text-white">Sair</a></li>
             </ul>
           </div>

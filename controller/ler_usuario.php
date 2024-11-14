@@ -1,4 +1,5 @@
 <?php
+    ob_start();
 
     include("../services/usuario_service.php");
 
@@ -8,15 +9,10 @@
 
     $validar = $usuarioService->ler($_POST, $_SESSION["id"]);
 
-    if($validar){
-        header("Location: ../views/perfil.php"); 
-        exit;
-    }
-    else{
-        $_SESSION['lido'] = 'NAO';
-        header("Location: ../views/cadastro.php"); 
+    if($_SESSION["atualizado"] == 'SIM'){
+        header("Location: ../views/perfil.php?cadastro=atualizado"); 
         exit;
     }
 
-
+    ob_end_clean();
 ?>

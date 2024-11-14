@@ -36,10 +36,8 @@ class UsuarioService{
 
 
         if ($inserirUsuarioStmt->execute()) {
-            echo "Usuário criado com sucesso!";
             return true;
         } else {
-            echo "Falha ao criar usuário!";
             return false;
         }
 
@@ -57,10 +55,8 @@ class UsuarioService{
         $atualizarUsuarioStmt = $usuario->preencherQuery($atualizarUsuarioStmt, 'atualizar');
 
         if ($atualizarUsuarioStmt->execute()) {
-            echo "Usuário criado com sucesso!";
             return true;
         } else {
-            echo "Falha ao criar usuário!";
             return false;
         }
         

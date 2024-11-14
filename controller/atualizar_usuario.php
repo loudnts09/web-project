@@ -10,7 +10,7 @@ $validar = $usuarioService->atualizar($_POST, $_SESSION["id"]);
 
 if($validar){
     $_SESSION['atualizado'] = 'SIM';
-    header("Location: ler_usuario.php?cadastro=atualizado"); 
+    header("Location: ler_usuario.php"); 
     exit;
 }
 else{

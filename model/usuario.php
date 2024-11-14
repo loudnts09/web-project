@@ -22,18 +22,10 @@
         }
         $this->nome = $data['nome'] ?? null;
         $this->numero = $data['numero'] ?? null;
-        $this->email = $data['email'];
+        $this->email = $data['email'] ?? null;
         $this->foto = $data['foto'] ?? null;
-        $this->tipo_perfil = $data['perfil'];
-        $this->senha = $data['senha'];
-
-        if(empty($this->numero)){
-            $this->numero = null;
-        }
-
-        if(empty($this->foto)){
-            $this->foto = null;
-        }
+        $this->tipo_perfil = $data['perfil'] ?? null;
+        $this->senha = $data['senha'] ?? null;
 
         if($this->tipo_perfil === 'usuario'){
             $this->tipo_perfil = 1;
