@@ -1,5 +1,10 @@
 <?php 
 
+ob_start();
+
+require "../controller/validar_acessos.php"; 
+include "../controller/ler_usuario.php";
+
 session_start();
 
 if (isset($_SESSION['dados'])) {
@@ -10,6 +15,12 @@ if (isset($_SESSION['dados'])) {
   $tipo_perfil = $_SESSION['dados']['tipo_perfil'];
   $foto = $_SESSION['dados']['foto'];
 }
+
+  $fotoPartida = explode('/', $foto);
+
+  echo end($fotoPartida);
+
+ob_end_clean();
 
 ?>
 
@@ -63,7 +74,7 @@ if (isset($_SESSION['dados'])) {
             <form action="../controller/atualizar_usuario.php" method="POST" enctype="multipart/form-data">
               <!-- Foto do Usuário -->
               <div class="form-goup mb-3">
-                <img src="<?php echo $foto; ?>" alt="Foto do usuário" class="rounded-circle mb-3" width="120" height="120"><br>
+                <img src="..\model\uploads\<?php echo end($fotoPartida); ?>" alt="Foto do usuário" class="rounded-circle mb-3" width="120" height="120"><br>
                 <label for="foto" class="form-label">Foto</label>
                 <input type="file" name="foto" class="form-control" id="foto" accept="image/*">
               </div>

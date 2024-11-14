@@ -84,7 +84,7 @@
                             <!-- Exemplo de pedido -->
                                                     
                             
-                                <div class="card mb-3 bg-light text-dark">
+                                <div class="card mb-3 bg-dark text-dark">
                                     <?php if(!isset($dadosPedidos)){ ?>
                                         
                                         <h3 class="text-center">NAO HÁ PEDIDOS</h3>
@@ -92,11 +92,11 @@
                                     else{
                                         for($i = 0; $i < count($dadosPedidos); $i++){
                                                 for($j = 0; $j < 1; $j++ ){ ?>
-                                                    <div class="card-body mb-3">
-                                                        <h5 class="card-title"><?php echo '#' . $dadosPedidos[$i]['id'] ?></h5>
-                                                        <h6 class="card-subtitle mb-2 text-muted"><?php echo $dadosPedidos[$i]['nome_da_pizza'] . " - " . $dadosPedidos[$i]['tamanho'] ?></h6>
-                                                        <p class="card-text"><?php echo $dadosPedidos[$i]['ingredientes'] ?></p>
-                                                        <p class="card-text">Status: <span class="text-success">Em preparo</span></p>
+                                                    <div class="card mb-3 bg-light text-dark">
+                                                        <h5 class="card-title m-3"><?php echo '#' . $dadosPedidos[$i]['id'] ?></h5>
+                                                        <h6 class="card-subtitle mb-2 mx-3 text-muted"><?php echo $dadosPedidos[$i]['nome_da_pizza'] . " - " . $dadosPedidos[$i]['tamanho'] ?></h6>
+                                                        <p class="card-text mx-3"><?php echo $dadosPedidos[$i]['ingredientes'] ?></p>
+                                                        <p class="card-text mx-3 mb-2">Status: <span class="text-success">Em preparo</span></p>
                                                     </div>
                                                 <?php }
                                         }

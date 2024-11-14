@@ -35,7 +35,6 @@
         }
 
     }
-
     public function criarString(){
         $sql = "INSERT INTO pessoas (foto, nome, numero, email, senha, tipo_perfil) VALUES (:foto, :nome, :numero, :email, :senha, :tipo_perfil)";
         return $sql;
@@ -52,11 +51,11 @@
     }
 
     public function deletarString(){
-        $sql =  "DELETE FROM pessoas WHERE id = :id";
+        $sql =  "DELETE FROM pedidos WHERE pessoa_id = :id; DELETE FROM pessoas WHERE id = :id";
         return $sql;
     }
 
-    public function   preencherQuery($stmt, $operacao){
+    public function preencherQuery($stmt, $operacao){
         
         if($operacao === 'ler' || $operacao === 'deletar'){
             $stmt->bindParam(":id", $this->id);

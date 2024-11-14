@@ -44,6 +44,16 @@ class UsuarioService{
     }
 
     public function atualizar($data, $id){
+
+        $arquivo = new Arquivo;
+        $caminho_da_foto = $arquivo->upload();
+        
+        if($caminho_da_foto === false){
+            $caminho_da_foto = null;
+        }
+
+        $data["foto"] = $caminho_da_foto;
+
         $usuario = new Usuario($this->db);
 
         $usuario->fromPOST($data, $id);
