@@ -79,6 +79,7 @@ O banco de dados pode ser configurado importando o arquivo `pizzaria_do_cuca.sql
 ├── index.php              # Página inicial do site
 ├── pizzaria_do_cuca.sql   # Esquema do banco de dados
 └── README.md              # Documentação do projeto
+```
 
 ## Como Configurar
 
